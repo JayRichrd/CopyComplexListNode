@@ -3,7 +3,48 @@ package com.jy;
 public class Main {
 
 	public static void main(String[] args) {
+		// 构建链表
+		ComplexListNode node5 = new ComplexListNode(5, null, null);
+		ComplexListNode node4 = new ComplexListNode(4, node5, null);
+		ComplexListNode node3 = new ComplexListNode(3, node4, null);
+		ComplexListNode node2 = new ComplexListNode(2, node3, null);
+		ComplexListNode node1 = new ComplexListNode(1, node2, null);
+		node1.mSibling = node3;
+		node2.mSibling = node5;
+		node4.mSibling = node2;
+		System.out.println("====================原始链表结构====================");
+		printNodes(node1);
+		System.out.println("====================克隆链表结构====================");
+		cloneNodes(node1);
+		connectedSiblingNodes(node1);
+		reconnectedNodes(node1);
+		printNodes(node1);
+	}
 
+	/**
+	 * 打印链表
+	 * 
+	 * @param head
+	 *            待打印链表的头结点
+	 */
+	public static void printNodes(ComplexListNode head) {
+		ComplexListNode complexListNode = head;
+		System.out.print("按顺序打印链表：");
+		while (complexListNode.mNext != null) {
+			System.out.print(complexListNode.mValue + "->");
+			complexListNode = complexListNode.mNext;
+		}
+		System.out.print(complexListNode.mValue);
+
+		System.out.println();
+
+		complexListNode = head;
+		System.out.println("打印mSibling信息：");
+		while (complexListNode != null) {
+			if (complexListNode.mSibling != null)
+				System.out.println(complexListNode.mValue + "->" + complexListNode.mSibling.mValue);
+			complexListNode = complexListNode.mNext;
+		}
 	}
 
 	/**
